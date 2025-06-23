@@ -7,3 +7,4 @@ Este projeto tem como objetivo desenvolver uma aplicação web para avalização
 ## Integrantes do Grupo
 
 * Andrew Sander Felix de Aragão Pinheiro
+* Luca Lopes Marques
