@@ -8,3 +8,4 @@ Este projeto tem como objetivo desenvolver uma aplicação web para avalização
 
 * Andrew Sander Felix de Aragão Pinheiro
 * Luca Lopes Marques
+* Mariana Farias de Brito
