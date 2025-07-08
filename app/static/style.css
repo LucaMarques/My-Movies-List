@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+:root{
+    --azul: rgb(19, 41, 62);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: var(--azul);
+    font-size: 1.2em;
+    color:white;
+}
+
+.header__logo{
+    font-size: 1.3em;
+    color: white;
+    text-decoration: none;
+}
+
+.header__container{
+    display: flex;
+    gap:15px;
+}
+
+.header__menu{
+    font-size:1.1em
+}
