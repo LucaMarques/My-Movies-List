@@ -34,3 +34,82 @@ header{
 .header__menu{
     font-size:1.1em
 }
+
+.footer {
+  background-color: #0D1B2A;
+  color: #ffffff;
+  padding: 40px 20px 20px;
+  text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 250px;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.footer-description {
+    margin-top: 10px;
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.footer-title {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.footer-social a {
+    display: inline-block;
+    margin-right: 15px;
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-social a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #33475b;
+    margin-top: 30px;
+    padding-top: 15px;
+    font-size: 12px;
+    color: #999999;
+}
