@@ -34,7 +34,15 @@ header{
 }
 
 body{
+    height: 100%;
     background-color: var(--azul);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    flex: 1;
 }
 /* banner do index.html */
 .banner{
