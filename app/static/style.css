@@ -8,6 +8,7 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
+    border:none;
 }
 
 header{
@@ -19,22 +20,163 @@ header{
     font-size: 1.2em;
     color:white;
 }
-
 .header__logo{
     font-size: 1.3em;
     color: white;
     text-decoration: none;
 }
-
 .header__container{
     display: flex;
     gap:15px;
 }
-
 .header__menu{
     font-size:1.1em
 }
 
+body{
+    height: 100%;
+    background-color: var(--azul);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    flex: 1;
+}
+/* banner do index.html */
+.banner{
+    position: relative;
+    width: 100%;
+    height: 210px;
+    margin-bottom: 500px;
+}
+.banner__container{
+    height: 100%;
+    position: relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.play-button{
+    margin: auto;
+    position:absolute;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(67, 67, 67, 0.822);
+    border: 2px solid white;
+    border-radius: 100%;
+    transition: transform 0.3s ease;
+}
+.play-button:hover{
+    transform: scale(1.09);
+}
+.play-button__triangle{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-40%,-50%);
+    width: 0;
+    height: 0;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-left: 26px solid rgb(255, 255, 255);
+}
+
+.banner__img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.banner__description{
+    margin-left: 15px;
+    position: absolute;
+    top:68%;
+    height: 150px;
+    display: flex;
+    gap:10px;
+}
+.banner__movie{
+    position: relative;
+    flex:1;
+    height: 150px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+}
+.banner__min-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 7px;
+}
+.banner__fav{
+    position: absolute;
+    top:0;
+    font-size: 3.5em;
+    color:rgba(67, 67, 67, 0.623);
+}
+.add{
+    font-family:'Inter',sans-serif;
+    font-weight: 100;
+    position: absolute;
+    font-size:0.8em;
+    top:50%;
+    left:50%;
+    transform:translate(-54%,-70%);
+    color:rgba(255, 255, 255, 0.87);
+}
+.banner__caption{
+    display: flex;
+    gap:10px;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex:2;
+}
+.banner__title{
+    font-family:'Inter', sans-serif;
+    font-size: 1.1em;
+    font-weight: 100;
+    color: white;
+}
+.banner__subtitle{
+    font-family: 'Inter',sans-serif;
+    color: rgba(167, 154, 154, 1);
+    font-weight: 100;
+    font-size: 0.9em;
+}
+.banner__database{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap:20px
+}
+.banner__star{
+    color:gold;
+}
+.banner__star-number{
+    font-family: 'Inter',sans-serif;
+    font-weight: lighter;
+    font-size: 0.8em;
+    color:white;
+}
+.banner__comments{
+    color:white;
+}
+.banner__comments-number{
+    font-family: 'Inter',sans-serif;
+    color: white;
+    font-weight: lighter;
+    font-size: 0.8em;
+}
+.banner__database-star,.banner__database-comments{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* footer */
 .footer {
   background-color: #0D1B2A;
   color: #ffffff;
