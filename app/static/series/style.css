@@ -8,10 +8,17 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
+    border:none;
 }
 
 body{
-    font-family: 'Inter', sans-serif;;
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+    background-color: var(--azul);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color:white;
 }
 
 header{
@@ -109,11 +116,167 @@ header{
     line-height: 1.6;
 }
 
+.section-title {
+    font-size: 20px;
+    margin: 20px 2% 10px;
+    font-weight: bold;
+
+}
+
+.episodes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.episode-card {
+    background: #11263E;
+    border-radius: 8px;
+    width: 150px;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.episode-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.episode-card img {
+    width: 100%;
+    height: auto;
+}
+
+.episode-info {
+    padding: 10px;
+    text-align: center;
+}
+
+.rating {
+    color: #FFD700;
+    font-size: 12px;
+    margin-top: 5px;
+    
+}
+
+.cast-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cast-card {
+    text-align: center;
+    background: #11263E;
+    border-radius: 8px;
+    width: 150px;
+    overflow: hidden;
+    font-size: 12px
+}
+
+.cast-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.cast-card img {
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+    height: auto;
+}
+
+.ratings-section {
+    margin-top: 20px;
+}
+
+.ratings-summary {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.rating-score {
+    text-align: center;
+    font-size: 18px;
+    color: #FFD700;
+}
+
+.rating-bars {
+    flex: 1;
+}
+
+.rating-bars div {
+    display: flex;
+    align-items: center;
+    margin: 2px 0;
+}
+
+.rating-bars span {
+    width: 20px;
+}
+
+.bar {
+    height: 8px;
+    background-color: #3498db;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.rating-button {
+    display: flex;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.rating-button:hover {
+    background-color: #2980b9;
+}
+
+/* Todos os episódios são visíveis em desktop */
+.episode-card {
+    background: #11263E;
+    border-radius: 8px;
+    width: 150px;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+/* Em telas menores, esconde os episódios a partir do 4º */
+@media (max-width: 650px) {
+    .episode-card:nth-child(n+4) {
+        display: none;
+    }
+    .cast-card:nth-child(n+4) {
+        display: none;
+    }
+}
+
+/* Em telas muito pequenas, exibe apenas 2 episódios */
+@media (max-width: 480px) {
+    .episode-card:nth-child(n+3) {
+        display: none;
+    }
+    .cast-card:nth-child(n+3) {
+        display: none;
+    }
+}
+
 .footer {
-  background-color: #0D1B2A;
-  color: #ffffff;
-  padding: 40px 20px 20px;
-  text-align: center;
+    background-color: #0D1B2A;
+    color: #ffffff;
+    padding: 40px 20px 20px;
+    text-align: center;
 }
 
 .footer-container {
@@ -187,3 +350,4 @@ header{
     font-size: 12px;
     color: #999999;
 }
+
