@@ -22,7 +22,14 @@ def index():
 def series(filme_id):
     filme = Filme.query.get_or_404(filme_id)
     episodios = filme.episodios
-    return render_template('film-page.html', filme=filme, episodios=episodios)
+
+    if episodios:
+        media = sum(ep.avaliacao for ep in episodios) / len(episodios)
+        media = round(media, 1)
+    else:
+        media = None
+
+    return render_template('film-page.html', filme=filme, episodios=episodios, media = media)
 
 
 # Formulário de novo episódio

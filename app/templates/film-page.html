@@ -34,7 +34,14 @@
                     <p class="temporada">1 temporada • 2025 • Terminada</p>
                     <p class="generos">Drama, Thriller, Romance, Mistério</p>
                     <div class="rating">
-                        <span style="color: gold;">★★★★★</span> <span>4.9/5</span>
+                        <span style="color: gold;">★★★★★</span> 
+                        <span>
+                            {% if media %}
+                                {{ media }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </span>
                     </div>
                     <p class="descricao">
                         {{ filme.descricao }}
