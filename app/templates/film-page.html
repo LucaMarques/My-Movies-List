@@ -53,70 +53,20 @@
         <section class="episodes-section">
             <h2 class="section-title">Episódios</h2>
             <div class="episodes-container">
-                <div class="episode-card">
-                    <img src="../static/img/series/ep1.webp" alt="Ep 1">
-                    <div class="episode-info">
-                        <strong>S01|01</strong>
-                        <p>Tell Me Sweet Little Lies</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.6/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../static/img/series/ep2.webp" alt="Ep 2">
-                    <div class="episode-info">
-                        <strong>S01|02</strong>
-                        <p>Wrap Her up in a Package of Lies</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../static/img/series/ep3.webp" alt="Ep 3">
-                    <div class="episode-info">
-                        <strong>S01|03</strong>
-                        <p>The Ties Were Black, The Lies Were White</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../static/img/series/ep4.webp" alt="Ep 4">
-                    <div class="episode-info">
-                        <strong>S01|04</strong>
-                        <p>The Fourth of You Lie</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../static/img/series/ep5.webp" alt="Ep 5">
-                    <div class="episode-info">
-                        <strong>S01|05</strong>
-                        <p>Lying Together in a Silver Lining</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../static/img/series/ep6.webp" alt="Ep 6">
-                    <div class="episode-info">
-                        <strong>S01|06</strong>
-                        <p>When Lies Gives You Lemons</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../static/img/series/ep7.webp" alt="Ep 7">
-                    <div class="episode-info">
-                        <strong>S01|07</strong>
-                        <p>Everybody Knows That The Captain Lied</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../static/img/series/ep8.webp" alt="Ep 8">
-                    <div class="episode-info">
-                        <strong>S01|08</strong>
-                        <p>My Friends Are Lying In The Sun</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
+                {% if episodios %}
+                    {% for ep in episodios %}
+                        <div class="episode-card">
+                            <img src="../static/img/series/{{ ep.numero }}.webp" alt="{{ ep.titulo }}">
+                            <div class="episode-info">
+                                <strong>{{ ep.numero }}</strong>
+                                <p>{{ ep.titulo }}</p>
+                                <p class="rating">⭐⭐⭐⭐⭐ {{ ep.avaliacao }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Nenhum episódio encontrado.</p>
+                {% endif %}
             </div>
         </section>
 

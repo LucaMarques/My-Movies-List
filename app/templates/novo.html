@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Episódio</title>
+</head>
+<body>
+    <h1>Adicionar Episódio</h1>
+    <form method="POST">
+        <label>Título:</label><br>
+        <input type="text" name="titulo" required><br><br>
+
+        <label>Número (ex: S01E01):</label><br>
+        <input type="text" name="numero" required><br><br>
+
+        <label>Avaliação:</label><br>
+        <input type="number" name="avaliacao" step="0.1" min="0" max="5" required><br><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+</body>
+</html>

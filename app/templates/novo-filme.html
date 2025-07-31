@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Filme</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Adicionar Novo Filme</h1>
+
+    <form method="POST">
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo" required><br><br>
+
+        <label for="descricao">Descrição:</label><br>
+        <textarea id="descricao" name="descricao" rows="5" required></textarea><br><br>
+
+        <button type="submit">Salvar Filme</button>
+    </form>
+
+    <a href="{{ url_for('index') }}">← Voltar para a lista</a>
+</body>
+</html>
