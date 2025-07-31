@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_migrate import Migrate
-from models import db, Episodio
+from models import db, Episodio, Filme
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
@@ -18,10 +18,12 @@ with app.app_context():
 def index():
     return render_template("index.html")
 
-@app.route('/series')
-def series():
-    episodios = Episodio.query.all()
-    return render_template('film-page.html', episodios=episodios)
+@app.route('/series/<int:filme_id>')
+def series(filme_id):
+    filme = Filme.query.get_or_404(filme_id)
+    episodios = filme.episodios
+    return render_template('film-page.html', filme=filme, episodios=episodios)
+
 
 # Formulário de novo episódio
 @app.route("/novo", methods=["GET", "POST"])
@@ -30,14 +32,17 @@ def novo():
         titulo = request.form["titulo"]
         numero = request.form["numero"]
         avaliacao = float(request.form["avaliacao"])
+        filme_id = int(request.form["filme_id"])
 
-        novo_episodio = Episodio(titulo=titulo, numero=numero, avaliacao=avaliacao)
+        novo_episodio = Episodio(titulo=titulo, numero=numero, avaliacao=avaliacao, filme_id = filme_id)
         db.session.add(novo_episodio)
         db.session.commit()
 
-        return redirect(url_for("series"))
+        return redirect(url_for("series", filme_id=filme_id))
+    
+    filmes = Filme.query.all()
+    return render_template("novo.html", filmes=filmes)
 
-'''
 @app.route('/novo_filme', methods=['GET', 'POST'])
 def novo_filme():
     if request.method == 'POST':
@@ -48,8 +53,8 @@ def novo_filme():
         db.session.add(novo_filme)
         db.session.commit()
 
-        return redirect(url_for('index'))
+        return redirect(url_for('novo'))
 
-    return render_template("novo.html")
-'''
+    return render_template("novo_filme.html")
+
 

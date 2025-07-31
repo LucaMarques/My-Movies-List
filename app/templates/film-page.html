@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/series/style.css">
     <script src="../static/series/script.js"></script>
-    <title>Filmes e séries</title>
+    <title>{{ filme.titulo }}</title>
 </head>
 <body>
     <header>
@@ -30,14 +30,14 @@
                 </div>
                 
                 <div class="banner__info">
-                    <h1>Mentirosos</h1>
+                    <h1>{{ filme.titulo }}</h1>
                     <p class="temporada">1 temporada • 2025 • Terminada</p>
                     <p class="generos">Drama, Thriller, Romance, Mistério</p>
                     <div class="rating">
                         <span style="color: gold;">★★★★★</span> <span>4.9/5</span>
                     </div>
                     <p class="descricao">
-                        Um ano após o misterioso acidente que a deixou com amnésia, Cadence, de 17 anos, volta à Ilha Beechwood, perto de Martha's Vineyard, em busca de respostas. Três gerações da distinta família Sinclair se reúnem em sua utopia de verão privada, e ninguém fala sobre o acidente, nem seus amigos de infância, "Os Mentirosos", nem seu primeiro amor, Gat, forçando-a a desvendar a verdade sozinha.
+                        {{ filme.descricao }}
                     </p>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                 {% if episodios %}
                     {% for ep in episodios %}
                         <div class="episode-card">
-                            <img src="../static/img/series/{{ ep.numero }}.webp" alt="{{ ep.titulo }}">
+                            <img src="../static/img/series/{{ ep.filme_id }}/{{ ep.numero }}.webp" alt="{{ ep.titulo }}">
                             <div class="episode-info">
                                 <strong>{{ ep.numero }}</strong>
                                 <p>{{ ep.titulo }}</p>
