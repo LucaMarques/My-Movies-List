@@ -1,14 +1,22 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import date
 
 db = SQLAlchemy()
 
+ator_filme = db.Table('ator_filme',
+    db.Column('ator_id', db.Integer, db.ForeignKey('ator.id'), primary_key=True),
+    db.Column('filme_id', db.Integer, db.ForeignKey('filme.id'), primary_key=True)
+)
 
 class Filme(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     titulo = db.Column(db.String(100), nullable=False)
     descricao = db.Column(db.Text)
-    episodios = db.relationship('Episodio', backref='filme', lazy=True)
+    temporada = db.Column(db.Integer)
+    ano = db.Column(db.Integer)
 
+    episodios = db.relationship('Episodio', backref='filme', lazy=True)
+    atores = db.relationship('Ator', secondary=ator_filme, back_populates='filmes')
 
 class Episodio(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -19,3 +27,15 @@ class Episodio(db.Model):
 
     def __repr__(self):
         return f"<Episodio {self.numero} - {self.titulo}>"
+    
+class Ator(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    data_nascimento = db.Column(db.Date, nullable=True)
+
+    filmes = db.relationship('Filme', secondary=ator_filme, back_populates='atores')
+
+    @property
+    def idade(self):
+        hoje = date.today()
+        return hoje.year - self.data_nascimento.year - ((hoje.month, hoje.day) < (self.data_nascimento.month, self.data_nascimento.day))

@@ -1,6 +1,7 @@
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 from flask_migrate import Migrate
-from models import db, Episodio, Filme
+from models import db, Episodio, Filme, Ator
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
@@ -22,6 +23,7 @@ def index():
 def series(filme_id):
     filme = Filme.query.get_or_404(filme_id)
     episodios = filme.episodios
+    atores = filme.atores
 
     if episodios:
         media = sum(ep.avaliacao for ep in episodios) / len(episodios)
@@ -29,7 +31,7 @@ def series(filme_id):
     else:
         media = None
 
-    return render_template('film-page.html', filme=filme, episodios=episodios, media = media)
+    return render_template('film-page.html', filme=filme, episodios=episodios, atores=atores, media = media)
 
 
 # Formulário de novo episódio
@@ -55,8 +57,10 @@ def novo_filme():
     if request.method == 'POST':
         titulo = request.form['titulo']
         descricao = request.form['descricao']
+        temporada = request.form['temporada']
+        ano = request.form['ano']
 
-        novo_filme = Filme(titulo=titulo, descricao=descricao)
+        novo_filme = Filme(titulo=titulo, descricao=descricao, temporada = temporada, ano = ano)
         db.session.add(novo_filme)
         db.session.commit()
 
@@ -64,4 +68,44 @@ def novo_filme():
 
     return render_template("novo_filme.html")
 
+@app.route('/novo-ator', methods=['GET', 'POST'])
+def novo_ator():
+    filmes = Filme.query.all()
+    atores = Ator.query.all()
+
+    if request.method == 'POST':
+        acao = request.form.get("acao")
+
+        if acao == "criar":
+            nome = request.form["nome"]
+            data_nascimento_str = request.form["data_nascimento"]
+            data_nascimento = datetime.strptime(data_nascimento_str, "%Y-%m-%d").date()
+
+            ids_filmes = request.form.getlist("filmes")
+            filmes_selecionados = Filme.query.filter(Filme.id.in_(ids_filmes)).all()
+
+            novo_ator = Ator(nome=nome, data_nascimento=data_nascimento)
+            db.session.add(novo_ator) 
+            for filme in filmes_selecionados:
+                novo_ator.filmes.append(filme)
+
+            db.session.commit()
+
+            return redirect(url_for("novo_ator"))
+
+        elif acao == "adicionar_filme":
+            ator_id = int(request.form["ator_existente"])
+            ator = Ator.query.get_or_404(ator_id)
+
+            ids_filmes = request.form.getlist("novos_filmes")
+            novos_filmes = Filme.query.filter(Filme.id.in_(ids_filmes)).all()
+
+            for filme in novos_filmes:
+                if filme not in ator.filmes:
+                    ator.filmes.append(filme)
+
+            db.session.commit()
+            return redirect(url_for("novo_ator"))
+
+    return render_template("novo_ator.html", filmes=filmes, atores=atores)
 

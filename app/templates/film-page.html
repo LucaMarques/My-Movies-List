@@ -31,7 +31,7 @@
                 
                 <div class="banner__info">
                     <h1>{{ filme.titulo }}</h1>
-                    <p class="temporada">1 temporada • 2025 • Terminada</p>
+                    <p class="temporada">{{ filme.temporada }} temporada • {{ filme.ano }} • Terminada</p>
                     <p class="generos">Drama, Thriller, Romance, Mistério</p>
                     <div class="rating">
                         <span style="color: gold;">★★★★★</span> 
@@ -80,18 +80,16 @@
         <section class="cast-section">
             <h2 class="section-title">Elenco</h2>
             <div class="cast-container">
-                <div class="cast-card">
-                    <img src="../static/img/series/emily.jpg" alt="Emily">
-                    <p><strong>Emily Alyn Lind</strong><br>Cadence Sinclair</p>
-                </div>
-                <div class="cast-card">
-                    <img src="../static/img/series/shubham.jpg" alt="Shubham">
-                    <p><strong>Shubham Maheshwari</strong><br>Gat Patil</p>
-                </div>
-                <div class="cast-card">
-                    <img src="../static/img/series/joseph.jpg" alt="Joseph">
-                    <p><strong>Joseph Zada</strong><br>Johnny Sinclair</p>
-                </div>
+                {% if filme.atores %}
+                    {% for ator in filme.atores %}
+                        <div class="cast-card">
+                            <img src="../static/img/ator/{{ ator.nome }}.jpg" alt="Emily">
+                            <p><strong>{{ ator.nome }}</strong><br>Cadence Sinclair</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                        <li>Nenhum ator registrado para este filme.</li>
+                {% endif %}
             </div>
         </section>
 
