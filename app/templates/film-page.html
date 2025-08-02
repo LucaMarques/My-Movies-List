@@ -20,13 +20,13 @@
         <section class="banner_container">
             <!--Imagem de fundo-->
             <div class="img_fundo">
-                <img src="../static/img/series/banner1-Photoroom.png" alt="">
+                <img src="../static/img/series/{{ filme.id }}/Banner.png" alt="Banner">
             </div>
 
             <!--Conteúdo do card-->
             <div class="card_container">
                 <div class="poster">
-                    <img src="../static/img/series/Capa.webp" alt="Banner da série">
+                    <img src="../static/img/series/{{ filme.id }}/Capa.webp" alt="Capa">
                 </div>
                 
                 <div class="banner__info">
@@ -80,11 +80,11 @@
         <section class="cast-section">
             <h2 class="section-title">Elenco</h2>
             <div class="cast-container">
-                {% if filme.atores %}
-                    {% for ator in filme.atores %}
+                {% if elenco %}
+                    {% for item in elenco %}
                         <div class="cast-card">
-                            <img src="../static/img/ator/{{ ator.nome }}.jpg" alt="Emily">
-                            <p><strong>{{ ator.nome }}</strong><br>Cadence Sinclair</p>
+                            <img src="../static/img/ator/{{ item.nome }}.jpg" alt="{{ item.nome }}">
+                            <p><strong>{{ item.nome }}</strong><br>{{ item.personagem }}</p>
                         </div>
                     {% endfor %}
                 {% else %}

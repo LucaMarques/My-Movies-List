@@ -13,12 +13,15 @@
         <label>Data de nascimento:</label><br>
         <input type="date" name="data_nascimento" required><br><br>
 
-        <label>Filmes que atuou:</label><br>
-        <select name="filmes" multiple size="5">
-            {% for filme in filmes %}
-                <option value="{{ filme.id }}">{{ filme.titulo }}</option>
-            {% endfor %}
-        </select><br><br>
+        <label>Filme:</label><br>
+            <select name="filmes" required>
+                {% for filme in filmes %}
+                    <option value="{{ filme.id }}">{{ filme.titulo }}</option>
+                {% endfor %}
+            </select><br><br>
+
+        <label>Personagem:</label><br>
+        <input type="text" name="personagem" required><br><br>
 
         <button type="submit" name="acao" value="criar">Cadastrar Ator</button>
     </form>
@@ -35,11 +38,14 @@
         </select><br><br>
 
         <label>Filmes para adicionar:</label><br>
-        <select name="novos_filmes" multiple size="5">
+        <select name="novos_filmes" required>
             {% for filme in filmes %}
                 <option value="{{ filme.id }}">{{ filme.titulo }}</option>
             {% endfor %}
         </select><br><br>
+
+        <label>Nome do personagem:</label><br>
+        <input type="text" name="personagem" required><br><br>
 
         <button type="submit" name="acao" value="adicionar_filme">Adicionar Filmes ao Ator</button>
     </form>
