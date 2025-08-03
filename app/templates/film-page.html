@@ -32,12 +32,20 @@
                 <div class="banner__info">
                     <h1>{{ filme.titulo }}</h1>
                     <p class="temporada">{{ filme.temporada }} temporada • {{ filme.ano }} • Terminada</p>
-                    <p class="generos">Drama, Thriller, Romance, Mistério</p>
+                    <p class="generos">
+                        {% if filme.generos %}
+                            {% for genero in filme.generos %}
+                                - {{ genero.nome }}
+                            {% endfor %}
+                        {% else %}
+                            -
+                        {% endif %} 
+                    </p>
                     <div class="rating">
                         <span style="color: gold;">★★★★★</span> 
                         <span>
-                            {% if media %}
-                                {{ media }}
+                            {% if filme.media %}
+                                {{ filme.media }}
                             {% else %}
                                 -
                             {% endif %}
@@ -83,8 +91,8 @@
                 {% if elenco %}
                     {% for item in elenco %}
                         <div class="cast-card">
-                            <img src="../static/img/ator/{{ item.nome }}.jpg" alt="{{ item.nome }}">
-                            <p><strong>{{ item.nome }}</strong><br>{{ item.personagem }}</p>
+                            <img src="../static/img/ator/{{ item.ator.nome }}.jpg" alt="{{ item.nome }}">
+                            <p><strong>{{ item.ator.nome }}</strong><br>{{ item.personagem }}</p>
                         </div>
                     {% endfor %}
                 {% else %}

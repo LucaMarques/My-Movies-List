@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 from flask_migrate import Migrate
-from models import db, Ator, Filme, Atuacao, Episodio
+from models import db, Ator, Filme, Atuacao, Episodio, Genero
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
@@ -23,19 +23,9 @@ def index():
 def series(filme_id):
     filme = Filme.query.get_or_404(filme_id)
     episodios = filme.episodios
-    
-    elenco = [
-        {"nome": atuacao.ator.nome, "personagem": atuacao.personagem}
-        for atuacao in filme.atuacoes
-    ]
+    atuacoes = filme.atuacoes
 
-    if episodios:
-        media = sum(ep.avaliacao for ep in episodios) / len(episodios)
-        media = round(media, 1)
-    else:
-        media = None
-
-    return render_template('film-page.html', filme=filme, episodios=episodios, elenco=elenco, media = media)
+    return render_template('film-page.html', filme=filme, episodios=episodios, elenco=atuacoes)
 
 
 # Formulário de novo episódio
@@ -56,21 +46,32 @@ def novo():
     filmes = Filme.query.all()
     return render_template("novo.html", filmes=filmes)
 
-@app.route('/novo_filme', methods=['GET', 'POST'])
+@app.route('/novo-filme', methods=['GET', 'POST'])
 def novo_filme():
+    generos = Genero.query.all()
+    filmes = Filme.query.all()
+
     if request.method == 'POST':
         titulo = request.form['titulo']
         descricao = request.form['descricao']
         temporada = request.form['temporada']
-        ano = request.form['ano']
+        ano = request.form['ano']  
+        
+        genero_ids = request.form.getlist("generos")  
+        genero_ids = [int(gid) for gid in genero_ids]  
 
         novo_filme = Filme(titulo=titulo, descricao=descricao, temporada = temporada, ano = ano)
+        
+        generos_selecionados = Genero.query.filter(Genero.id.in_(genero_ids)).all()
+        for genero in generos_selecionados:
+            novo_filme.generos.append(genero)
+
         db.session.add(novo_filme)
         db.session.commit()
 
         return redirect(url_for('novo'))
 
-    return render_template("novo_filme.html")
+    return render_template("novo_filme.html", generos = generos)
 
 @app.route('/novo-ator', methods=['GET', 'POST'])
 def novo_ator():
@@ -102,8 +103,6 @@ def novo_ator():
 
         elif acao == "adicionar_filme":
             ator_id = int(request.form["ator_existente"])
-            ator = Ator.query.get_or_404(ator_id)
-
             ids_filmes = request.form.getlist("novos_filmes")
             personagem = request.form.get("personagem")
 
@@ -120,7 +119,44 @@ def novo_ator():
                     db.session.add(nova_atuacao)
 
             db.session.commit()
-            return redirect(url_for("novo_ator"))
+            return redirect(url_for("novo_filme"))
 
     return render_template("novo_ator.html", filmes=filmes, atores=atores)
 
+@app.route('/novo-genero', methods=['GET', 'POST'])
+def novo_genero():
+    filmes = Filme.query.all()
+    generos = Genero.query.all()
+
+    if request.method == 'POST':
+        acao = request.form.get("acao")
+
+        if acao == "criar":
+            nome = request.form["nome"]
+
+            filmes_ids = request.form.getlist("filmes")
+            filmes_selecionados = Filme.query.filter(Filme.id.in_(filmes_ids)).all()
+
+            novo_genero = Genero(nome = nome)
+            novo_genero.filmes = filmes_selecionados
+            db.session.add(novo_genero) 
+            
+            db.session.commit()
+
+            return redirect(url_for("novo_ator"))
+
+        elif acao == "adicionar_genero":
+            genero_id = int(request.form["genero_existente"])
+            genero = Genero.query.get_or_404(genero_id)
+
+            filmes_ids = request.form.getlist("novos_filmes")
+            novos_filmes = Filme.query.filter(Filme.id.in_(filmes_ids)).all()
+
+            for filme in novos_filmes:
+                if filme not in genero.filmes:
+                    genero.filmes.append(filme)
+
+            db.session.commit()
+            return redirect(url_for("novo_genero"))
+
+    return render_template("novo_genero.html", filmes=filmes, generos = generos)

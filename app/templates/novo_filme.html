@@ -15,11 +15,18 @@
         <label for="descricao">Descrição:</label><br>
         <textarea id="descricao" name="descricao" rows="5" required></textarea><br><br>
 
-        <label for="temporada">numero:</label><br>
+        <label for="temporada">Temporadas:</label><br>
         <input type="number" id="temporada" name="temporada" step="1" min="1" max="50" required><br><br>        
         
         <label for="ano">ano:</label><br>
         <input type="number" id="ano" name="ano" step="1" min="1898" max="2030" required><br><br>
+
+        <label>Generos para adicionar:</label><br>
+        <select name="generos" multiple>
+            {% for genero in generos %}
+                <option value="{{ genero.id }}">{{ genero.nome }}</option>
+            {% endfor %}
+        </select><br><br>
 
         <button type="submit">Salvar Filme</button>
     </form>
