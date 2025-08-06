@@ -91,7 +91,7 @@ class Genero(db.Model):
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     nome = db.Column(db.String(100), nullable=False)
-    usuario = db.Column(db.String(50), unique=True, nullable=False)
+    usuario = db.Column(db.String(50), name='fk_avaliacao_usuario_id', unique=True, nullable=False)
     senha_hash = db.Column(db.String(100), nullable=False)
     foto_url = db.Column(db.String(100), nullable=True)
     descricao = db.Column(db.Text, nullable=True)
