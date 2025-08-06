@@ -1,0 +1,8 @@
+<h2>Cadastro</h2>
+<form method="POST">
+    <input name="nome" placeholder="Nome">
+    <input name="usuario" placeholder="Usuário" required>
+    <input type="password" name="senha" placeholder="Senha" required>
+    <button type="submit">Cadastrar</button>
+</form>
+<a href="{{ url_for('login') }}">Já tem conta? Faça login</a>

@@ -1,11 +1,12 @@
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_migrate import Migrate
-from models import db, Ator, Filme, Atuacao, Episodio, Genero
+from models import db, Ator, Filme, Atuacao, Episodio, Genero, Usuario
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = "chave-super-secreta"  # Troque isso em produção
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -160,3 +161,60 @@ def novo_genero():
             return redirect(url_for("novo_genero"))
 
     return render_template("novo_genero.html", filmes=filmes, generos = generos)
+
+@app.route("/cadastro", methods=["GET", "POST"])
+def cadastro():
+    if request.method == "POST":
+        nome = request.form["nome"]
+        usuario = request.form["usuario"]
+        senha = request.form["senha"]
+
+        if Usuario.query.filter_by(usuario=usuario).first():
+            flash("Nome de usuário já está em uso.")
+            return redirect(url_for("cadastro"))
+
+        novo_usuario = Usuario(nome=nome, usuario=usuario)
+        novo_usuario.set_senha(senha)
+
+        db.session.add(novo_usuario)
+        db.session.commit()
+
+        flash("Cadastro realizado com sucesso. Faça login.")
+        return redirect(url_for("login"))
+
+    return render_template("cadastro.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        usuario = request.form["usuario"]
+        senha = request.form["senha"]
+
+        usuario_db = Usuario.query.filter_by(usuario=usuario).first()
+
+        if usuario_db and usuario_db.verificar_senha(senha):
+            session["usuario_id"] = usuario_db.id
+            flash("Login realizado com sucesso!")
+            return redirect(url_for("index"))  # Altere conforme sua rota principal
+        else:
+            flash("Usuário ou senha inválidos.")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    session.pop("usuario_id", None)
+    flash("Logout realizado com sucesso.")
+    return redirect(url_for("login"))
+
+@app.route("/perfil")
+def perfil():
+    if "usuario_id" not in session:
+        flash("Você precisa estar logado para ver essa página.")
+        return redirect(url_for("login"))
+
+    usuario = Usuario.query.get(session["usuario_id"])
+    return render_template("perfil.html", usuario=usuario)

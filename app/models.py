@@ -91,8 +91,8 @@ class Genero(db.Model):
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     nome = db.Column(db.String(100), nullable=False)
-    usuario = db.Column(db.String(50), nullable=False)
-    senha = db.Column(db.String(100), nullable=False)
+    usuario = db.Column(db.String(50), unique=True, nullable=False)
+    senha_hash = db.Column(db.String(100), nullable=False)
     foto_url = db.Column(db.String(100), nullable=True)
     descricao = db.Column(db.Text, nullable=True)
 
@@ -107,6 +107,12 @@ class Usuario(db.Model):
         lazy='dynamic')
 
     avaliacoes = db.relationship('Avaliacao', back_populates='usuario', cascade='all, delete-orphan')
+
+    def set_senha(self, senha):
+        self.senha_hash = generate_password_hash(senha)
+
+    def verificar_senha(self, senha):
+        return check_password_hash(self.senha_hash, senha)
 
 class Avaliacao(db.Model):
     __tablename__ = 'avaliacao'
