@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/series/style.css">
-    <script src="../static/series/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>{{ filme.titulo }}</title>
 </head>
 <body>
     <header>
         <a  class="header__logo" href="#">LOGO</a>
         <div class="header__container">
-            <i class="fa-solid fa-magnifying-glass header__lupa"></i>
+            <form id="search-form" autocomplete="off">
+                <input type="text" id="search-input" placeholder="Buscar filmes..." />
+                <div id="search-suggestions" class="suggestions"></div>
+            </form>
             <i class="fa-solid fa-user header__login"></i>
             <i class="fa-solid fa-bars header__menu"></i>
         </div>
@@ -155,5 +158,6 @@
         </div>
     </footer>
     <script src="https://kit.fontawesome.com/e354a8dc68.js" crossorigin="anonymous" rel="preconnect"></script>
+    <script src="../static/series/script.js"></script>
 </body>
 </html>

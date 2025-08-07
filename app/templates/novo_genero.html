@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Cadastrar Genero</h1>
-    <form method="POST" action="{{ url_for('novo_genero') }}">
+    <form method="POST" action="{{ url_for('admin.novo_genero') }}">
         <label>Nome:</label><br>
         <input type="text" name="nome" required><br><br>
 
@@ -23,7 +23,7 @@
     <hr>
 
     <h2>Adicionar Genero a Filme</h2>
-    <form method="POST" action="{{ url_for('novo_genero') }}">
+    <form method="POST" action="{{ url_for('admin.novo_genero') }}">
         <label>Selecione o genero:</label><br>
         <select name="genero_existente" required>
             {% for genero in generos %}

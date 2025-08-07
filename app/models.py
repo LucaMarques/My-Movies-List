@@ -84,7 +84,7 @@ class Atuacao(db.Model):
 
 class Genero(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    nome = db.Column(db.String(50), nullable=True)
+    nome = db.Column(db.String(50), nullable=False)
 
     filmes = db.relationship('Filme', secondary=filme_genero, back_populates='generos')
 

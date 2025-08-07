@@ -1,36 +1,11 @@
+from . import admin
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from flask_migrate import Migrate
-from models import db, Ator, Filme, Atuacao, Episodio, Genero, Usuario
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = "chave-super-secreta"  # Troque isso em produção
-
-db.init_app(app)
-migrate = Migrate(app, db)
-
-# Garante que as tabelas existem
-with app.app_context():
-    db.create_all()
-
-
-@app.route('/')
-def index():
-    return render_template("index.html")
-
-@app.route('/series/<int:filme_id>')
-def series(filme_id):
-    filme = Filme.query.get_or_404(filme_id)
-    episodios = filme.episodios
-    atuacoes = filme.atuacoes
-
-    return render_template('film-page.html', filme=filme, episodios=episodios, elenco=atuacoes)
-
+from app.models import db, Ator, Filme, Atuacao, Episodio, Genero, Usuario
 
 # Formulário de novo episódio
-@app.route("/novo", methods=["GET", "POST"])
+@admin.route("/novo", methods=["GET", "POST"])
 def novo():
     if request.method == "POST":
         titulo = request.form["titulo"]
@@ -42,12 +17,13 @@ def novo():
         db.session.add(novo_episodio)
         db.session.commit()
 
-        return redirect(url_for("series", filme_id=filme_id))
+        return redirect(url_for("main.series", filme_id=filme_id))
     
     filmes = Filme.query.all()
     return render_template("novo.html", filmes=filmes)
 
-@app.route('/novo-filme', methods=['GET', 'POST'])
+# Formulário de novo filme
+@admin.route('/novo-filme', methods=['GET', 'POST'])
 def novo_filme():
     generos = Genero.query.all()
     filmes = Filme.query.all()
@@ -70,11 +46,12 @@ def novo_filme():
         db.session.add(novo_filme)
         db.session.commit()
 
-        return redirect(url_for('novo'))
+        return redirect(url_for('admin.novo'))
 
     return render_template("novo_filme.html", generos = generos)
 
-@app.route('/novo-ator', methods=['GET', 'POST'])
+# Formulário de novo ator
+@admin.route('/novo-ator', methods=['GET', 'POST'])
 def novo_ator():
     filmes = Filme.query.all()
     atores = Ator.query.all()
@@ -100,7 +77,7 @@ def novo_ator():
 
             db.session.commit()
 
-            return redirect(url_for("novo_ator"))
+            return redirect(url_for("admin.novo_ator"))
 
         elif acao == "adicionar_filme":
             ator_id = int(request.form["ator_existente"])
@@ -120,11 +97,12 @@ def novo_ator():
                     db.session.add(nova_atuacao)
 
             db.session.commit()
-            return redirect(url_for("novo_filme"))
+            return redirect(url_for("admin.novo_filme"))
 
     return render_template("novo_ator.html", filmes=filmes, atores=atores)
 
-@app.route('/novo-genero', methods=['GET', 'POST'])
+# Formulário de novo genero
+@admin.route('/novo-genero', methods=['GET', 'POST'])
 def novo_genero():
     filmes = Filme.query.all()
     generos = Genero.query.all()
@@ -144,7 +122,7 @@ def novo_genero():
             
             db.session.commit()
 
-            return redirect(url_for("novo_ator"))
+            return redirect(url_for("admin.novo_ator"))
 
         elif acao == "adicionar_genero":
             genero_id = int(request.form["genero_existente"])
@@ -158,63 +136,6 @@ def novo_genero():
                     genero.filmes.append(filme)
 
             db.session.commit()
-            return redirect(url_for("novo_genero"))
+            return redirect(url_for("admin.novo_genero"))
 
     return render_template("novo_genero.html", filmes=filmes, generos = generos)
-
-@app.route("/cadastro", methods=["GET", "POST"])
-def cadastro():
-    if request.method == "POST":
-        nome = request.form["nome"]
-        usuario = request.form["usuario"]
-        senha = request.form["senha"]
-
-        if Usuario.query.filter_by(usuario=usuario).first():
-            flash("Nome de usuário já está em uso.")
-            return redirect(url_for("cadastro"))
-
-        novo_usuario = Usuario(nome=nome, usuario=usuario)
-        novo_usuario.set_senha(senha)
-
-        db.session.add(novo_usuario)
-        db.session.commit()
-
-        flash("Cadastro realizado com sucesso. Faça login.")
-        return redirect(url_for("login"))
-
-    return render_template("cadastro.html")
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        usuario = request.form["usuario"]
-        senha = request.form["senha"]
-
-        usuario_db = Usuario.query.filter_by(usuario=usuario).first()
-
-        if usuario_db and usuario_db.verificar_senha(senha):
-            session["usuario_id"] = usuario_db.id
-            flash("Login realizado com sucesso!")
-            return redirect(url_for("index"))  # Altere conforme sua rota principal
-        else:
-            flash("Usuário ou senha inválidos.")
-            return redirect(url_for("login"))
-
-    return render_template("login.html")
-
-
-@app.route("/logout")
-def logout():
-    session.pop("usuario_id", None)
-    flash("Logout realizado com sucesso.")
-    return redirect(url_for("login"))
-
-@app.route("/perfil")
-def perfil():
-    if "usuario_id" not in session:
-        flash("Você precisa estar logado para ver essa página.")
-        return redirect(url_for("login"))
-
-    usuario = Usuario.query.get(session["usuario_id"])
-    return render_template("perfil.html", usuario=usuario)

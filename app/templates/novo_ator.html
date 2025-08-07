@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Cadastrar Novo Ator</h1>
-    <form method="POST" action="{{ url_for('novo_ator') }}">
+    <form method="POST" action="{{ url_for('admin.novo_ator') }}">
         <label>Nome:</label><br>
         <input type="text" name="nome" required><br><br>
 
@@ -29,7 +29,7 @@
     <hr>
 
     <h2>Adicionar Filme a Ator Existente</h2>
-    <form method="POST" action="{{ url_for('novo_ator') }}">
+    <form method="POST" action="{{ url_for('admin.novo_ator') }}">
         <label>Selecione o ator:</label><br>
         <select name="ator_existente" required>
             {% for ator in atores %}
