@@ -1,6 +1,6 @@
 from . import main
 from datetime import datetime
-from flask import render_template, request, redirect, url_for, session, flash, jsonify
+from flask import render_template, request, redirect, url_for, session, flash, jsonify # type: ignore
 from app.models import db, Ator, Filme, Atuacao, Episodio, Genero, Usuario
 
 
@@ -54,7 +54,7 @@ def login():
         if usuario_db and usuario_db.verificar_senha(senha):
             session["usuario_id"] = usuario_db.id
             flash("Login realizado com sucesso!")
-            return redirect(url_for("index"))  # Altere conforme sua rota principal
+            return redirect(url_for("main.index"))  # Altere conforme sua rota principal
         else:
             flash("Usuário ou senha inválidos.")
             return redirect(url_for("main.login"))
