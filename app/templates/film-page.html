@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../app/static/series/style.css">
-    <script src="../../app/static/series/script.js"></script>
-    <title>Filmes e séries</title>
+    <link rel="stylesheet" href="../static/css/series/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>{{ filme.titulo }}</title>
 </head>
 <body>
     <header>
         <a  class="header__logo" href="#">LOGO</a>
         <div class="header__container">
-            <i class="fa-solid fa-magnifying-glass header__lupa"></i>
+            <form id="search-form" autocomplete="off">
+                <input type="text" id="search-input" placeholder="Buscar filmes..." />
+                <div id="search-suggestions" class="suggestions"></div>
+            </form>
             <i class="fa-solid fa-user header__login"></i>
             <i class="fa-solid fa-bars header__menu"></i>
         </div>
@@ -20,24 +23,39 @@
         <section class="banner_container">
             <!--Imagem de fundo-->
             <div class="img_fundo">
-                <img src="../templates/series/img/banner1-Photoroom.png" alt="">
+                <img src="../static/img/series/{{ filme.id }}/Banner.png" alt="Banner">
             </div>
 
             <!--Conteúdo do card-->
             <div class="card_container">
                 <div class="poster">
-                    <img src="../templates/series/img/Capa.webp" alt="Banner da série">
+                    <img src="../static/img/series/{{ filme.id }}/Capa.webp" alt="Capa">
                 </div>
                 
                 <div class="banner__info">
-                    <h1>Mentirosos</h1>
-                    <p class="temporada">1 temporada • 2025 • Terminada</p>
-                    <p class="generos">Drama, Thriller, Romance, Mistério</p>
+                    <h1>{{ filme.titulo }}</h1>
+                    <p class="temporada">{{ filme.temporada }} temporada • {{ filme.ano }} • Terminada</p>
+                    <p class="generos">
+                        {% if filme.generos %}
+                            {% for genero in filme.generos %}
+                                - {{ genero.nome }}
+                            {% endfor %}
+                        {% else %}
+                            -
+                        {% endif %} 
+                    </p>
                     <div class="rating">
-                        <span style="color: gold;">★★★★★</span> <span>4.9/5</span>
+                        <span style="color: gold;">★★★★★</span> 
+                        <span>
+                            {% if filme.media %}
+                                {{ filme.media }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </span>
                     </div>
                     <p class="descricao">
-                        Um ano após o misterioso acidente que a deixou com amnésia, Cadence, de 17 anos, volta à Ilha Beechwood, perto de Martha's Vineyard, em busca de respostas. Três gerações da distinta família Sinclair se reúnem em sua utopia de verão privada, e ninguém fala sobre o acidente, nem seus amigos de infância, "Os Mentirosos", nem seu primeiro amor, Gat, forçando-a a desvendar a verdade sozinha.
+                        {{ filme.descricao }}
                     </p>
                 </div>
             </div>
@@ -46,95 +64,43 @@
         <section class="trailer_container">
             <h2>Reproduzir Trailer</h2>
             <div class="trailer_video">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/EhGa3IQ7M5U?si=w-kwehr0_JB0P7mz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="{{ filme.trailer }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </section>
         
         <section class="episodes-section">
             <h2 class="section-title">Episódios</h2>
             <div class="episodes-container">
-                <div class="episode-card">
-                    <img src="../templates/series/img/ep1.webp" alt="Ep 1">
-                    <div class="episode-info">
-                        <strong>S01|01</strong>
-                        <p>Tell Me Sweet Little Lies</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.6/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../templates/series/img/ep2.webp" alt="Ep 2">
-                    <div class="episode-info">
-                        <strong>S01|02</strong>
-                        <p>Wrap Her up in a Package of Lies</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../templates/series/img/ep3.webp" alt="Ep 3">
-                    <div class="episode-info">
-                        <strong>S01|03</strong>
-                        <p>The Ties Were Black, The Lies Were White</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../templates/series/img/ep4.webp" alt="Ep 4">
-                    <div class="episode-info">
-                        <strong>S01|04</strong>
-                        <p>The Fourth of You Lie</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../templates/series/img/ep5.webp" alt="Ep 5">
-                    <div class="episode-info">
-                        <strong>S01|05</strong>
-                        <p>Lying Together in a Silver Lining</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../templates/series/img/ep6.webp" alt="Ep 6">
-                    <div class="episode-info">
-                        <strong>S01|06</strong>
-                        <p>When Lies Gives You Lemons</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../templates/series/img/ep7.webp" alt="Ep 7">
-                    <div class="episode-info">
-                        <strong>S01|07</strong>
-                        <p>Everybody Knows That The Captain Lied</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
-                <div class="episode-card">
-                    <img src="../templates/series/img/ep8.webp" alt="Ep 8">
-                    <div class="episode-info">
-                        <strong>S01|08</strong>
-                        <p>My Friends Are Lying In The Sun</p>
-                        <p class="rating">⭐⭐⭐⭐⭐ 4.8/5</p>
-                    </div>
-                </div>
+                {% if episodios %}
+                    {% for ep in episodios %}
+                        <div class="episode-card">
+                            <img src="../static/img/series/{{ ep.filme_id }}/{{ ep.numero }}.webp" alt="{{ ep.titulo }}">
+                            <div class="episode-info">
+                                <strong>{{ ep.numero }}</strong>
+                                <p>{{ ep.titulo }}</p>
+                                <p class="rating">⭐⭐⭐⭐⭐ {{ ep.avaliacao }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Nenhum episódio encontrado.</p>
+                {% endif %}
             </div>
         </section>
 
         <section class="cast-section">
             <h2 class="section-title">Elenco</h2>
             <div class="cast-container">
-                <div class="cast-card">
-                    <img src="../templates/series/img/emily.jpg" alt="Emily">
-                    <p><strong>Emily Alyn Lind</strong><br>Cadence Sinclair</p>
-                </div>
-                <div class="cast-card">
-                    <img src="../templates/series/img/shubham.jpg" alt="Shubham">
-                    <p><strong>Shubham Maheshwari</strong><br>Gat Patil</p>
-                </div>
-                <div class="cast-card">
-                    <img src="../templates/series/img/joseph.jpg" alt="Joseph">
-                    <p><strong>Joseph Zada</strong><br>Johnny Sinclair</p>
-                </div>
+                {% if elenco %}
+                    {% for item in elenco %}
+                        <div class="cast-card">
+                            <img src="../static/img/ator/{{ item.ator.nome }}.jpg" alt="{{ item.nome }}">
+                            <p><strong>{{ item.ator.nome }}</strong><br>{{ item.personagem }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                        <li>Nenhum ator registrado para este filme.</li>
+                {% endif %}
             </div>
         </section>
 
@@ -192,5 +158,6 @@
         </div>
     </footer>
     <script src="https://kit.fontawesome.com/e354a8dc68.js" crossorigin="anonymous" rel="preconnect"></script>
+    <script src="../static/series/script.js"></script>
 </body>
 </html>
