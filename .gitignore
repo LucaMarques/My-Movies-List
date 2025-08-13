@@ -1,3 +1,5 @@
+# Ignora todos os diretórios __pycache__
 venv/
 .vscode/
 **/__pycache__/
+
