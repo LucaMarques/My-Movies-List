@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciar Generos</title>
+</head>
+<body>
+    <h1>Cadastrar Genero</h1>
+    <form method="POST" action="{{ url_for('admin.novo_genero') }}">
+        <label>Nome:</label><br>
+        <input type="text" name="nome" required><br><br>
+
+        <label>Filme:</label><br>
+            <select name="filmes" multiple required>
+                {% for filme in filmes %}
+                    <option value="{{ filme.id }}">{{ filme.titulo }}</option>
+                {% endfor %}
+            </select><br><br>
+
+        <button type="submit" name="acao" value="criar">Cadastrar Genero</button>
+    </form>
+
+    <hr>
+
+    <h2>Adicionar Genero a Filme</h2>
+    <form method="POST" action="{{ url_for('admin.novo_genero') }}">
+        <label>Selecione o genero:</label><br>
+        <select name="genero_existente" required>
+            {% for genero in generos %}
+                <option value="{{ genero.id }}">{{ genero.nome }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Filmes para adicionar:</label><br>
+        <select name="novos_filmes" multiple required>
+            {% for filme in filmes %}
+                <option value="{{ filme.id }}">{{ filme.titulo }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <button type="submit" name="acao" value="adicionar_genero">Adicionar Filmes ao Ator</button>
+    </form>
+</body>
+</html>
