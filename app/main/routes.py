@@ -1,6 +1,6 @@
 from . import main
 from datetime import datetime
-from flask import render_template, request, redirect, url_for, session, flash, jsonify
+from flask import render_template, request, redirect, url_for, session, flash, jsonify # type: ignore
 from app.models import db, Ator, Filme, Atuacao, Episodio, Genero, Usuario
 
 
