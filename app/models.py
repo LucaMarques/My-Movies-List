@@ -1,8 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy # type: ignore
 from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash # type: ignore
+from .extensions import login_manager, db
+from flask_login import UserMixin
 
-db = SQLAlchemy()
+@login_manager.user_loader
+def load_user(id):
+    return Usuario.query.get(int(id))
 
 filme_genero = db.Table('filme_genero',
     db.Column('genero_id', db.Integer, db.ForeignKey('genero.id'), primary_key=True),
@@ -88,12 +92,12 @@ class Genero(db.Model):
 
     filmes = db.relationship('Filme', secondary=filme_genero, back_populates='generos')
 
-class Usuario(db.Model):
+class Usuario(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
     nome = db.Column(db.String(100), nullable=False)
     usuario = db.Column(db.String(50), name='fk_avaliacao_usuario_id', unique=True, nullable=False)
     senha_hash = db.Column(db.String(100), nullable=False)
-    foto_url = db.Column(db.String(100), nullable=True)
+    foto_url = db.Column(db.Text, nullable=True)
     descricao = db.Column(db.Text, nullable=True)
 
     filmes_fav = db.relationship('Filme',
