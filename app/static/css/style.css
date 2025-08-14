@@ -191,8 +191,14 @@ main{
 
 }
 
+.top10--container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .top10--container-title{
-    gap:10px;
+    gap:8px;
     margin-left: 1.7em;
     display: flex;
 }
@@ -206,6 +212,15 @@ main{
 .top10--title{
     font-family: 'Poppins', sans-serif;
     font-size: 1.3em;
+    color: white;
+}
+
+.top10--subtitle{
+    margin-right:1.7em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
+    text-decoration: none;
     color:var(--enfase_1);
 }
 
