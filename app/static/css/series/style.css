@@ -1,9 +1,14 @@
 @charset "UTF-8";
 
+/* DECLARAÇÃO DE VARIÁVEIS NO CSS */
 :root{
-    --azul: rgb(19, 41, 62);
+    --azul_1: #020d1f;
+    --azul_2: #01172C;
+    --enfase_1: #FFB236;
+    
 }
 
+/* ADICIONA ALGUMAS CONFIGURAÇÕES PADRÃO PARA TODOS OS ELEMENTOS */
 *{
     margin:0;
     padding:0;
@@ -14,7 +19,7 @@
 body{
     font-family: 'Inter', sans-serif;
     height: 100%;
-    background-color: var(--azul);
+    background-color: var(--azul_2);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -26,7 +31,7 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px;
-    background-color: var(--azul);
+    background-color: var(--azul_1);
     font-size: 1.2em;
     color:white;
 }
@@ -77,7 +82,7 @@ header{
 #search-suggestions div {
     padding: 8px 12px;
     cursor: pointer;
-    color: var(--azul);
+    color: var(--azul_2);
     font-family: inherit;
 }
 
@@ -181,7 +186,7 @@ header #search-input {
 }
 
 .trailer_container{
-    background-color: var(--azul);
+    background-color: var(--azul_2);
     padding: 40px;
     text-align: center;
 }
@@ -420,7 +425,7 @@ header #search-input {
 }
 
 .footer {
-    background-color: #0D1B2A;
+    background-color: var(--azul_1);
     color: #ffffff;
     padding: 40px 20px 20px;
     text-align: center;

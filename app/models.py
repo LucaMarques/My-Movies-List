@@ -29,7 +29,7 @@ class Filme(db.Model):
     descricao = db.Column(db.Text, nullable=False)
     temporada = db.Column(db.Integer, nullable=False)
     ano = db.Column(db.Integer, nullable=False)
-    trailer = db.Column(db.String(100), nullable=True)
+    trailer = db.Column(db.Text, nullable=True)
 
     episodios = db.relationship('Episodio', backref='filme', lazy=True)
     atuacoes = db.relationship("Atuacao", back_populates='filme', cascade='all, delete-orphan')
