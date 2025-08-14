@@ -37,4 +37,20 @@
             </div>
         </div>
     </section>
+    <section class="top10">
+        <div class="top10--container-title">
+            <div class="destaque"></div>
+            <h2 class="top10--title">EM ALTA</h2>
+        </div>
+        <div class="carrossel--visivel">
+            <li class="carrossel">
+                {% for filme in filmes %}
+                    <ul class="carrossel--filmes">
+                        <span class="numeracao">{{filme.id}}</span>
+                        <img src="../static/img/min-Jurassic.jpg" alt="Imagem do filme {{filme.titulo}}" class="carrossel--capa">
+                    </ul>
+                {% endfor %}
+            </li>
+        </div>
+    </section>
 {% endblock %}
