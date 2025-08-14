@@ -1,9 +1,13 @@
-@charset "UTF-8";
+@charset "UTF-8";   
 
+/* DECLARAÇÃO DE VARIÁVEIS NO CSS */
 :root{
-    --azul: rgb(19, 41, 62);
+    --azul_1: #020d1f;
+    --azul_2: #01172C;
+    
 }
 
+/* ADICIONA ALGUMAS CONFIGURAÇÕES PADRÃO PARA TODOS OS ELEMENTOS */
 *{
     margin:0;
     padding:0;
@@ -16,7 +20,7 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px;
-    background-color: var(--azul);
+    background-color: var(--azul_2);
     font-size: 1.2em;
     color:white;
 }
@@ -35,7 +39,7 @@ header{
 
 body{
     height: 100%;
-    background-color: var(--azul);
+    background-color: var(--azul_2);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -89,9 +93,11 @@ main{
     object-fit: cover;
 }
 .banner__description{
-    margin-left: 15px;
     position: absolute;
+    width: max-content;
     top:68%;
+    left: 50%;
+    transform: translateX(-50%);
     height: 150px;
     display: flex;
     gap:10px;
@@ -135,9 +141,9 @@ main{
     flex:2;
 }
 .banner__title{
-    font-family:'Inter', sans-serif;
-    font-size: 1.1em;
-    font-weight: 100;
+    font-family:'Poppins', sans-serif;
+    font-size: 1em;
+    font-weight: 300;
     color: white;
 }
 .banner__subtitle{
@@ -178,7 +184,7 @@ main{
 
 /* footer */
 .footer {
-  background-color: #0D1B2A;
+  background-color: var(--azul_1);
   color: #ffffff;
   padding: 40px 20px 20px;
   text-align: center;

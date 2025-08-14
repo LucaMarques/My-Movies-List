@@ -1,91 +1,40 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <title>Pipoca Flix</title>
-</head>
-<body>
-    <header>
-        <a  class="header__logo" href="#">LOGO</a>
-        <div class="header__container">
-            <i class="fa-solid fa-magnifying-glass header__lupa"></i>
-            <i class="fa-solid fa-user header__login"></i>
-            <i class="fa-solid fa-bars header__menu"></i>
+{% extends "base.html" %}
+
+{% block title %} Página Inicial {% endblock %}
+
+{% block content %}
+    <section class="banner">
+        <div class="banner__container">
+            <button class="play-button">
+                <div class="play-button__triangle"></div>
+            </button>
+            <img class="banner__img" src="../static/img/JurassicWorld.webp">
         </div>
-    </header>
-    <main>
-        <section class="banner">
-            <div class="banner__container">
-                <button class="play-button">
-                    <div class="play-button__triangle"></div>
-                </button>
-                <img class="banner__img" src="../static/img/JurassicWorld.webp">
-            </div>
-            <div class="banner__description">
-                <div class="banner__movie">
-                    <i class="fa-solid fa-bookmark banner__fav">
-                        <div class="add">
-                            <p>+</p>
-                        </div>
-                    </i>
-                    <img class="banner__min-img" src="../static/img/min-Jurassic.jpg">
-                </div>
-                <div class="banner__caption">
-                    <div>
-                        <p class="banner__title">Jurassic World: Rebirth</p>
-                        <p class="banner__subtitle">Gareth Edwards</p>
+        <div class="banner__description">
+            <div class="banner__movie">
+                <i class="fa-solid fa-bookmark banner__fav">
+                    <div class="add">
+                        <p>+</p>
                     </div>
-                    <div class="banner__database">
-                        <div class="banner__database-star">
-                            <i class="fa-solid fa-star banner__star"></i>
-                            <p class="banner__star-number">545</p>
-                        </div>
-                        <div class="banner__database-comments">
-                            <i class="fa-solid fa-comments banner__comments"></i>
-                            <p class="banner__comments-number">120</p>
-                        </div>
+                </i>
+                <img class="banner__min-img" src="../static/img/min-Jurassic.jpg">
+            </div>
+            <div class="banner__caption">
+                <div>
+                    <p class="banner__title">Jurassic World: Rebirth</p>
+                    <p class="banner__subtitle">Gareth Edwards</p>
+                </div>
+                <div class="banner__database">
+                    <div class="banner__database-star">
+                        <i class="fa-solid fa-star banner__star"></i>
+                        <p class="banner__star-number">545</p>
+                    </div>
+                    <div class="banner__database-comments">
+                        <i class="fa-solid fa-comments banner__comments"></i>
+                        <p class="banner__comments-number">120</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-    <footer class="footer">
-        <div class="footer-container">
-    <!-- Logo e descrição -->
-            <div class="footer-section">
-                <h2 class="footer-logo">LOGO</h2>
-                <p class="footer-description">Explore os melhores filmes, séries e trailers em um só lugar.</p>
-            </div>
-
-    <!-- Navegação -->
-            <div class="footer-section">
-                <h3 class="footer-title">Navegação</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Em Alta</a></li>
-                    <li><a href="#">Categorias</a></li>
-                    <li><a href="#">Minha Conta</a></li>
-                </ul>
-            </div>
-
-    <!-- Redes sociais -->
-            <div class="footer-section">
-                <h3 class="footer-title">Descubra mais</h3>
-                <div class="footer-social">
-                    <a href="#">TikTok</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">YouTube</a>
-                </div>
-            </div>
         </div>
-
-        <div class="footer-bottom">
-            &copy; 2025 PipocaFlix. Todos os direitos reservados.
-        </div>
-    </footer>
-    <script src="https://kit.fontawesome.com/e354a8dc68.js" crossorigin="anonymous" rel="preconnect"></script>
-</body>
-</html>
+    </section>
+{% endblock %}
