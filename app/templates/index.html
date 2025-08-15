@@ -37,23 +37,63 @@
             </div>
         </div>
     </section>
-    <section class="top10">
-        <div class="top10--container">
-            <div class="top10--container-title">
+    <section class="carrossel">
+        <div class="carrossel--header">
+            <div class="carrossel--text">
                 <div class="destaque"></div>
-                <h2 class="top10--title">FILMES EM ALTA</h2>
+                <h2 class="title">FILMES EM ALTA</h2>
             </div>
-            <a href="#" class="top10--subtitle">Ver tudo ></a>
+            <a href="#" class="subtitle">Ver tudo ></a>
         </div>
-        <div class="carrossel--visivel">
-            <li class="carrossel">
+        <div class="carrossel--main">
+            <ul class="carrossel-interno__filmes">
                 {% for filme in filmes %}
-                    <ul class="carrossel--filmes">
+                    <li  class="carrossel--filmes">
                         <span class="numeracao">{{filme.id}}</span>
                         <img src="../static/img/min-Jurassic.jpg" alt="Imagem do filme {{filme.titulo}}" class="carrossel--capa">
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <section class="carrossel">
+        <div class="carrossel--header">
+            <div class="carrossel--text">
+                <div class="destaque"></div>
+                <h2 class="title">ATORES EM ALTA</h2>
+            </div>
+            <a href="#" class="subtitle">Ver tudo ></a>
+        </div>
+        <div class="carrossel--main">
+            <li class="carrossel-interno__atores">
+                {% for item in atores %}
+                    <ul class="carrossel--atores">
+                        <img src="../static/img/ator/{{item.nome}}.jpg" alt="Foto do ator {{item.nome}}" class="carrossel--ator">
                     </ul>
                 {% endfor %}
             </li>
         </div>
     </section>
+
+    <section class="carrossel">
+        <div class="carrossel--header">
+            <div class="carrossel--text">
+                <div class="destaque"></div>
+                <h2 class="title">SÉRIES EM ALTA</h2>
+            </div>
+            <a href="#" class="subtitle">Ver tudo ></a>
+        </div>
+        <div class="carrossel--main">
+            <ul class="carrossel-interno__filmes">
+                {% for filme in filmes %}
+                    <li  class="carrossel--filmes">
+                        <span class="numeracao">{{filme.id}}</span>
+                        <img src="../static/img/min-Jurassic.jpg" alt="Imagem do filme {{filme.titulo}}" class="carrossel--capa">
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
 {% endblock %}

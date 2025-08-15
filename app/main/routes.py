@@ -1,6 +1,6 @@
 from . import main
 from flask import render_template, request, redirect, url_for, session, flash, jsonify # type: ignore
-from app.models import db, Filme, Usuario
+from app.models import db, Filme, Usuario, Ator
 from flask_login import login_required, current_user, login_user, logout_user
 
 
@@ -8,7 +8,8 @@ from flask_login import login_required, current_user, login_user, logout_user
 @main.route('/')
 def index():
     filmes = Filme.query.limit(4).all()
-    return render_template("index.html",filmes=filmes)
+    atores= Ator.query.limit(4).all()
+    return render_template("index.html",filmes=filmes,atores=atores)
 
 # Pagina de filmes/series
 @main.route('/series/<int:filme_id>')
