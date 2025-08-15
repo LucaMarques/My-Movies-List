@@ -1,163 +1,123 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/series/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>{{ filme.titulo }}</title>
-</head>
-<body>
-    <header>
-        <a  class="header__logo" href="#">LOGO</a>
-        <div class="header__container">
-            <form id="search-form" autocomplete="off">
-                <input type="text" id="search-input" placeholder="Buscar filmes..." />
-                <div id="search-suggestions" class="suggestions"></div>
-            </form>
-            <i class="fa-solid fa-user header__login"></i>
-            <i class="fa-solid fa-bars header__menu"></i>
-        </div>
-    </header>
-    <main>
-        <section class="banner_container">
-            <!--Imagem de fundo-->
-            <div class="img_fundo">
-                <img src="../static/img/series/{{ filme.id }}/Banner.png" alt="Banner">
-            </div>
+{% extends "base.html" %}
+    
+{% block title %} {{ filme.titulo }} {% endblock %}
 
-            <!--Conteúdo do card-->
-            <div class="card_container">
-                <div class="poster">
-                    <img src="../static/img/series/{{ filme.id }}/Capa.webp" alt="Capa">
-                </div>
-                
-                <div class="banner__info">
-                    <h1>{{ filme.titulo }}</h1>
-                    <p class="temporada">{{ filme.temporada }} temporada • {{ filme.ano }} • Terminada</p>
-                    <p class="generos">
-                        {% if filme.generos %}
-                            {% for genero in filme.generos %}
-                                - {{ genero.nome }}
-                            {% endfor %}
+{% block link %} ../static/css/series/style.css {% endblock %}
+
+{% block content %}
+    <section class="banner_container">
+        <!--Imagem de fundo-->
+        <div class="img_fundo">
+            <img src="../static/img/series/{{ filme.id }}/Banner.png" alt="Banner">
+        </div>
+        <!--Conteúdo do card-->
+        <div class="card_container">
+            <div class="poster">
+                <img src="../static/img/series/{{ filme.id }}/Capa.webp" alt="Capa">
+            </div>
+            <div class="banner__info">
+                <h1>{{ filme.titulo }}</h1>
+                <p class="temporada">{{ filme.temporada }} temporada • {{ filme.ano }} • Terminada</p>
+                <p class="generos">
+                    {% if filme.generos %}
+                        {% for genero in filme.generos %}
+                            - {{ genero.nome }}
+                        {% endfor %}
+                    {% else %}
+                        -
+                    {% endif %} 
+                </p>
+                <div class="rating">
+                    <span style="color: gold;">★★★★★</span> 
+                    <span>
+                        {% if filme.media %}
+                            {{ filme.media }}
                         {% else %}
                             -
-                        {% endif %} 
-                    </p>
-                    <div class="rating">
-                        <span style="color: gold;">★★★★★</span> 
-                        <span>
-                            {% if filme.media %}
-                                {{ filme.media }}
-                            {% else %}
-                                -
-                            {% endif %}
-                        </span>
-                    </div>
-                    <p class="descricao">
-                        {{ filme.descricao }}
-                    </p>
+                        {% endif %}
+                    </span>
                 </div>
+                <p class="descricao">
+                    {{ filme.descricao }}
+                </p>
             </div>
-        </section>
-
-        <section class="trailer_container">
-            <h2>Reproduzir Trailer</h2>
-            <div class="trailer_video">
-                <iframe width="560" height="315" src="{{ filme.trailer }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-        </section>
+        </div>
+    </section>
         
-        <section class="episodes-section">
-            <h2 class="section-title">Episódios</h2>
-            <div class="episodes-container">
+    <section class="trailer_container">
+        <h2>Reproduzir Trailer</h2>
+        <div class="trailer_video">
+            <iframe width="560" height="315" src="{{ filme.trailer }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <section class="carrossel">
+        <div class="carrossel--header">
+            <div class="carrossel--text">
+                <div class="destaque"></div>
+                <h2 class="title">EPISÓDIOS</h2>
+            </div>
+            <a href="#" class="subtitle">Ver todos ></a>
+        </div>
+        <div class="carrossel--main">
+            <li class="carrossel-interno__episodios">
                 {% if episodios %}
                     {% for ep in episodios %}
-                        <div class="episode-card">
-                            <img src="../static/img/series/{{ ep.filme_id }}/{{ ep.numero }}.webp" alt="{{ ep.titulo }}">
-                            <div class="episode-info">
-                                <strong>{{ ep.numero }}</strong>
-                                <p>{{ ep.titulo }}</p>
-                                <p class="rating">⭐⭐⭐⭐⭐ {{ ep.avaliacao }}</p>
+                        <ul class="carrossel--episodios">
+                            <div class="episode-card">
+                                <img src="../static/img/series/{{ ep.filme_id }}/{{ ep.numero }}.webp" alt="{{ ep.titulo }}">
+                                <div class="episode-info">
+                                    <strong>{{ ep.numero }}</strong>
+                                    <p>{{ ep.titulo }}</p>
+                                    <p class="rating">⭐⭐⭐⭐⭐ {{ ep.avaliacao }}</p>
+                                </div>
                             </div>
-                        </div>
+                        </ul>
                     {% endfor %}
                 {% else %}
                     <p>Nenhum episódio encontrado.</p>
                 {% endif %}
-            </div>
-        </section>
+            </li>
+        </div>
+    </section>
 
-        <section class="cast-section">
-            <h2 class="section-title">Elenco</h2>
-            <div class="cast-container">
-                {% if elenco %}
-                    {% for item in elenco %}
+    <section class="carrossel">
+        <div class="carrossel--header">
+            <div class="carrossel--text">
+                <div class="destaque"></div>
+                <h2 class="title">ELENCO</h2>
+            </div>
+            <a href="#" class="subtitle">Ver todos ></a>
+        </div>
+        <div class="carrossel--main">
+            <li class="carrossel-interno__atores">
+                {% for item in elenco %}
+                    <ul class="carrossel--atores">
                         <div class="cast-card">
                             <img src="../static/img/ator/{{ item.ator.nome }}.jpg" alt="{{ item.nome }}">
                             <p><strong>{{ item.ator.nome }}</strong><br>{{ item.personagem }}</p>
                         </div>
-                    {% endfor %}
-                {% else %}
-                        <li>Nenhum ator registrado para este filme.</li>
-                {% endif %}
-            </div>
-        </section>
+                    </ul>
+                {% endfor %}
+            </li>
+        </div>
+    </section>
 
-        <section class="ratings-section">
-            <h2 class="section-title">Avaliações dos usuários</h2>
-            <div class="ratings-summary">
-                <div class="rating-score">
-                    <span>⭐ 4.9</span>
-                    <p>6.3K</p>
-                </div>
-                <div class="rating-bars">
-                    <div><span>1</span><div class="bar" style="width: 10%;"></div></div>
-                    <div><span>2</span><div class="bar" style="width: 15%;"></div></div>
-                    <div><span>3</span><div class="bar" style="width: 20%;"></div></div>
-                    <div><span>4</span><div class="bar" style="width: 40%;"></div></div>
-                    <div><span>5</span><div class="bar" style="width: 80%;"></div></div>
-                </div>
+    <section class="ratings-section">
+        <h2 class="section-title">Avaliações dos usuários</h2>
+        <div class="ratings-summary">
+            <div class="rating-score">
+                <span>⭐ 4.9</span>
+                <p>6.3K</p>
             </div>
-            <button class="rating-button">+ Avaliação</button>
-        </section>
-    </main>
-    <footer class="footer">
-        <div class="footer-container">
-    <!-- Logo e descrição -->
-            <div class="footer-section">
-                <h2 class="footer-logo">LOGO</h2>
-                <p class="footer-description">Explore os melhores filmes, séries e trailers em um só lugar.</p>
-            </div>
-
-    <!-- Navegação -->
-            <div class="footer-section">
-                <h3 class="footer-title">Navegação</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Em Alta</a></li>
-                    <li><a href="#">Categorias</a></li>
-                    <li><a href="#">Minha Conta</a></li>
-                </ul>
-            </div>
-
-    <!-- Redes sociais -->
-            <div class="footer-section">
-                <h3 class="footer-title">Descubra mais</h3>
-                <div class="footer-social">
-                    <a href="#">TikTok</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">YouTube</a>
-                </div>
+            <div class="rating-bars">
+                <div><span>1</span><div class="bar" style="width: 10%;"></div></div>
+                <div><span>2</span><div class="bar" style="width: 15%;"></div></div>
+                <div><span>3</span><div class="bar" style="width: 20%;"></div></div>
+                <div><span>4</span><div class="bar" style="width: 40%;"></div></div>
+                <div><span>5</span><div class="bar" style="width: 80%;"></div></div>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            &copy; 2025 PipocaFlix. Todos os direitos reservados.
-        </div>
-    </footer>
-    <script src="https://kit.fontawesome.com/e354a8dc68.js" crossorigin="anonymous" rel="preconnect"></script>
-    <script src="../static/series/script.js"></script>
-</body>
-</html>
+        <button class="rating-button">+ Avaliação</button>
+    </section>
+{% endblock %}

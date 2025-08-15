@@ -1,0 +1,199 @@
+@charset "UTF-8";
+
+/* DECLARAÇÃO DE VARIÁVEIS NO CSS */
+:root{
+    --azul_1: #020d1f;
+    --azul_2: #01172C;
+    --enfase_1: #FFB236;
+    
+}
+
+/* ADICIONA ALGUMAS CONFIGURAÇÕES PADRÃO PARA TODOS OS ELEMENTOS */
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    border:none;
+}
+
+body{
+    font-family: 'Poppins', 'Inter', sans-serif;
+    height: 100%;
+    background-color: var(--azul_2);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color:white;
+}
+
+main{
+    flex: 1;
+}
+
+header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: var(--azul_1);
+    font-size: 1.2em;
+    color:white;
+}
+
+.header__logo{
+    font-size: 1.3em;
+    color: white;
+    text-decoration: none;
+}
+
+.header__container{
+    display: flex;
+    gap:15px;
+}
+
+.header__menu{
+    font-size:1.1em
+}
+
+/* Sugestões de busca */
+#search-form {
+    position: relative;
+    width: 250px; /* ajuste conforme seu layout .header__container */
+}
+
+#search-input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1em;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+#search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#search-suggestions div {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: var(--azul_2);
+    font-family: inherit;
+}
+
+#search-suggestions div:hover {
+    background-color: #f0f0f0;
+}
+
+/* Reseta autocomplete do navegador interno */
+#search-form input:-webkit-autofill,
+#search-form input:-webkit-autofill:hover,
+#search-form input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #333;
+    transition: background-color 5000s ease-in-out 0s;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, Arial, sans-serif;
+}
+
+/* Integração visual no header escuro */
+header #search-input {
+    border: 1px solid #ccc;
+}
+
+/* Mobile: ajusta tamanho e posicionamento */
+@media (max-width: 650px) {
+    #search-form { width: 200px; }
+    #search-suggestions div { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+    #search-form { width: 150px; }
+    #search-suggestions div { font-size: 12px; }
+}
+
+.footer {
+    background-color: var(--azul_1);
+    color: #ffffff;
+    padding: 40px 20px 20px;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 250px;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.footer-description {
+    margin-top: 10px;
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.footer-title {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.footer-social a {
+    display: inline-block;
+    margin-right: 15px;
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-social a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #33475b;
+    margin-top: 30px;
+    padding-top: 15px;
+    font-size: 12px;
+    color: #999999;
+}
