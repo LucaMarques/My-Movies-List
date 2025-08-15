@@ -184,20 +184,20 @@ main{
 }
 
 
-.top10{
+.carrossel{
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap:20px;
 
 }
 
-.top10--container{
+.carrossel--header{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.top10--container-title{
+.carrossel--text{
     gap:8px;
     margin-left: 1.7em;
     display: flex;
@@ -209,13 +209,13 @@ main{
     background-color: var(--enfase_1);
 }
 
-.top10--title{
+.title{
     font-family: 'Poppins', sans-serif;
     font-size: 1.3em;
     color: white;
 }
 
-.top10--subtitle{
+.subtitle{
     margin-right:1.7em;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
@@ -229,7 +229,7 @@ main{
     height: 200px;
 }
 
-.carrossel{
+.carrossel-interno__filmes{
     margin-left: 5em;
     gap:80px;
     display: flex;
@@ -255,7 +255,6 @@ main{
 
 }
 
-
 .carrossel--capa{
     width: 90px;
     height: 140px;
@@ -263,6 +262,26 @@ main{
     border-radius: 7px;
 }
 
+/* ESTILIZAÇÃO ESPECÍFICA PARA A PARTE DOS ATORES */
+
+.carrossel-interno__atores{
+    margin-left: 2em;
+    gap:30px;
+    display: flex;
+}
+
+.carrossel--atores{
+    position: relative;
+    color:white; 
+    overflow: visible;       
+}
+
+.carrossel--ator{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 100%;
+}
 
 
 
