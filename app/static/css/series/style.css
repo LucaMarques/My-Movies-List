@@ -1,113 +1,25 @@
 @charset "UTF-8";
 
+/* DECLARAÇÃO DE VARIÁVEIS NO CSS */
 :root{
-    --azul: rgb(19, 41, 62);
+    --azul_1: #020d1f;
+    --azul_2: #01172C;
+    --enfase_1: #FFB236;
+    
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-    border:none;
+/* Utilizado para dar destaque */
+.destaque{
+    width: 3px;
+    height: 29px;
+    background-color: var(--enfase_1);
 }
 
-body{
-    font-family: 'Inter', sans-serif;
-    height: 100%;
-    background-color: var(--azul);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    color:white;
-}
-
-header{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 30px;
-    background-color: var(--azul);
-    font-size: 1.2em;
-    color:white;
-}
-
-.header__logo{
+/* Utilizado para todos os titulos */
+.title{
+    font-family: 'Poppins', sans-serif;
     font-size: 1.3em;
     color: white;
-    text-decoration: none;
-}
-
-.header__container{
-    display: flex;
-    gap:15px;
-}
-
-.header__menu{
-    font-size:1.1em
-}
-
-/* Sugestões de busca */
-#search-form {
-    position: relative;
-    width: 250px; /* ajuste conforme seu layout .header__container */
-}
-
-#search-input {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 1em;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #333;
-}
-
-#search-suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-#search-suggestions div {
-    padding: 8px 12px;
-    cursor: pointer;
-    color: var(--azul);
-    font-family: inherit;
-}
-
-#search-suggestions div:hover {
-    background-color: #f0f0f0;
-}
-
-/* Reseta autocomplete do navegador interno */
-#search-form input:-webkit-autofill,
-#search-form input:-webkit-autofill:hover,
-#search-form input:-webkit-autofill:focus {
-    -webkit-text-fill-color: #333;
-    transition: background-color 5000s ease-in-out 0s;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, Arial, sans-serif;
-}
-
-/* Integração visual no header escuro */
-header #search-input {
-    border: 1px solid #ccc;
-}
-
-/* Mobile: ajusta tamanho e posicionamento */
-@media (max-width: 650px) {
-    #search-form { width: 200px; }
-    #search-suggestions div { font-size: 14px; }
-}
-
-@media (max-width: 480px) {
-    #search-form { width: 150px; }
-    #search-suggestions div { font-size: 12px; }
 }
 
 .banner_container{
@@ -181,7 +93,7 @@ header #search-input {
 }
 
 .trailer_container{
-    background-color: var(--azul);
+    background-color: var(--azul_2);
     padding: 40px;
     text-align: center;
 }
@@ -207,23 +119,61 @@ header #search-input {
     border-radius: 10px;
 }
 
-.section-title {
-    font-size: 20px;
-    margin: 20px 2% 10px;
-    font-weight: bold;
+/* Carrossel */
+.carrossel{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
 
 }
 
-.episodes-container {
+.carrossel--header{
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carrossel--text{
+    gap:8px;
+    margin-left: 1.7em;
+    display: flex;
+}
+
+.subtitle{
+    margin-right:1.7em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
+    text-decoration: none;
+    color:var(--enfase_1);
+}
+
+.carrossel--main{
+    overflow-x: auto;
+    height: 200px;
+    cursor: grab;
+    user-select: none;
+    scrollbar-width: none;
+}
+
+.carrossel-interno__episodios{
+    margin-left: 2em;
+    gap:30px;
+    display: flex;
+}
+
+.carrossel--episodios{
+    position: relative;
+    color:white; 
+    overflow: visible;       
 }
 
 .episode-card {
+    margin-top: auto;
     background: #11263E;
     border-radius: 8px;
     width: 150px;
+    height: 180px;
     overflow: hidden;
     font-size: 12px;
 }
@@ -250,10 +200,16 @@ header #search-input {
     
 }
 
-.cast-container {
+.carrossel-interno__atores{
+    margin-left: 2em;
+    gap:30px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+}
+
+.carrossel--atores{
+    position: relative;
+    color:white; 
+    overflow: visible;       
 }
 
 .cast-card {
@@ -343,14 +299,9 @@ header #search-input {
     font-size: 12px;
 }
 
-/* Em telas menores, esconde os episódios a partir do 4º */
+/* AJUSTES DE CONTEÚDO*/
+/* Em telas menores*/
 @media (max-width: 650px) {
-    .episode-card:nth-child(n+4) {
-        display: none;
-    }
-    .cast-card:nth-child(n+4) {
-        display: none;
-    }
     .trailer_video iframe{
         width: 90%;
         height: 250px;
@@ -366,14 +317,8 @@ header #search-input {
     }
 }
 
-/* Em telas muito pequenas, exibe apenas 2 episódios */
+/* Em telas muito pequenas*/
 @media (max-width: 480px) {
-    .episode-card:nth-child(n+3) {
-        display: none;
-    }
-    .cast-card:nth-child(n+3) {
-        display: none;
-    }
     .trailer_video iframe{
         width: 90%;
         height: 150px;
@@ -419,82 +364,4 @@ header #search-input {
     }
 }
 
-.footer {
-    background-color: #0D1B2A;
-    color: #ffffff;
-    padding: 40px 20px 20px;
-    text-align: center;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: space-between;
-}
-
-.footer-section {
-    flex: 1 1 250px;
-}
-
-.footer-logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.footer-description {
-    margin-top: 10px;
-    color: #cccccc;
-    font-size: 14px;
-}
-
-.footer-title {
-    text-align: center;
-    font-size: 16px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-links li {
-    margin-bottom: 8px;
-}
-
-.footer-links a {
-    color: #cccccc;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.footer-links a:hover {
-    color: #ffffff;
-}
-
-.footer-social a {
-    display: inline-block;
-    margin-right: 15px;
-    color: #cccccc;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.footer-social a:hover {
-    color: #ffffff;
-}
-
-.footer-bottom {
-    text-align: center;
-    border-top: 1px solid #33475b;
-    margin-top: 30px;
-    padding-top: 15px;
-    font-size: 12px;
-    color: #999999;
-}
 

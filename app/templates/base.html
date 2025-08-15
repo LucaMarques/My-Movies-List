@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="{% block link %}  {% endblock %}">
+    <title>{% block title %} Pipoca Flix {% endblock %}</title>
+</head>
+<body>
+    <header>
+        <a  class="header__logo" href="#">LOGO</a>
+        <div class="header__container">
+            <form id="search-form" autocomplete="off">
+                <input type="text" id="search-input" placeholder="Buscar filmes..." />
+                <div id="search-suggestions" class="suggestions"></div>
+            </form>
+            <i class="fa-solid fa-user header__login"></i>
+            <i class="fa-solid fa-bars header__menu"></i>
+        </div>
+    </header>
+    <main>
+        {% block content %} {%endblock %}
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+    <!-- Logo e descrição -->
+            <div class="footer-section">
+                <h2 class="footer-logo">LOGO</h2>
+                <p class="footer-description">Explore os melhores filmes, séries e trailers em um só lugar.</p>
+            </div>
+
+    <!-- Navegação -->
+            <div class="footer-section">
+                <h3 class="footer-title">Navegação</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Em Alta</a></li>
+                    <li><a href="#">Categorias</a></li>
+                    <li><a href="#">Minha Conta</a></li>
+                </ul>
+            </div>
+
+    <!-- Redes sociais -->
+            <div class="footer-section">
+                <h3 class="footer-title">Descubra mais</h3>
+                <div class="footer-social">
+                    <a href="#">TikTok</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 PipocaFlix. Todos os direitos reservados.
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/e354a8dc68.js" crossorigin="anonymous" rel="preconnect"></script>
+    <!-- geralmente no final do body -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="../static/series/script.js"></script>
+</body>
+</html>

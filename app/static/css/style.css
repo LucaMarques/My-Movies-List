@@ -1,55 +1,19 @@
-@charset "UTF-8";
+@charset "UTF-8";   
 
+/* DECLARAÇÃO DE VARIÁVEIS NO CSS */
 :root{
-    --azul: rgb(19, 41, 62);
+    --azul_1: #020d1f;
+    --azul_2: #01172C;
+    --enfase_1: #FFB236;
+    
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-    border:none;
-}
-
-header{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 30px;
-    background-color: var(--azul);
-    font-size: 1.2em;
-    color:white;
-}
-.header__logo{
-    font-size: 1.3em;
-    color: white;
-    text-decoration: none;
-}
-.header__container{
-    display: flex;
-    gap:15px;
-}
-.header__menu{
-    font-size:1.1em
-}
-
-body{
-    height: 100%;
-    background-color: var(--azul);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-main{
-    flex: 1;
-}
 /* banner do index.html */
 .banner{
     position: relative;
     width: 100%;
     height: 210px;
-    margin-bottom: 500px;
+    margin-bottom: 130px;
 }
 .banner__container{
     height: 100%;
@@ -89,9 +53,11 @@ main{
     object-fit: cover;
 }
 .banner__description{
-    margin-left: 15px;
     position: absolute;
+    width: max-content;
     top:68%;
+    left: 50%;
+    transform: translateX(-50%);
     height: 150px;
     display: flex;
     gap:10px;
@@ -135,15 +101,15 @@ main{
     flex:2;
 }
 .banner__title{
-    font-family:'Inter', sans-serif;
-    font-size: 1.1em;
-    font-weight: 100;
+    font-family:'Poppins', sans-serif;
+    font-size: 1em;
+    font-weight: 300;
     color: white;
 }
 .banner__subtitle{
-    font-family: 'Inter',sans-serif;
+    font-family: 'Roboto',sans-serif;
     color: rgba(167, 154, 154, 1);
-    font-weight: 100;
+    font-weight: 200;
     font-size: 0.9em;
 }
 .banner__database{
@@ -176,82 +142,108 @@ main{
     gap: 5px;
 }
 
-/* footer */
-.footer {
-  background-color: #0D1B2A;
-  color: #ffffff;
-  padding: 40px 20px 20px;
-  text-align: center;
-}
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
+.carrossel{
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+    flex-direction: column;
+    gap:20px;
+
+}
+
+.carrossel--header{
+    display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.footer-section {
-    flex: 1 1 250px;
+.carrossel--text{
+    gap:8px;
+    margin-left: 1.7em;
+    display: flex;
 }
 
-.footer-logo {
-    font-size: 24px;
-    font-weight: bold;
+.destaque{
+    width: 3px;
+    height: 29px;
+    background-color: var(--enfase_1);
 }
 
-.footer-description {
-    margin-top: 10px;
-    color: #cccccc;
-    font-size: 14px;
+.title{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3em;
+    color: white;
 }
 
-.footer-title {
-    text-align: center;
-    font-size: 16px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-links li {
-    margin-bottom: 8px;
-}
-
-.footer-links a {
-    color: #cccccc;
+.subtitle{
+    margin-right:1.7em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
     text-decoration: none;
-    font-size: 14px;
+    color:var(--enfase_1);
 }
 
-.footer-links a:hover {
-    color: #ffffff;
+.carrossel--main{
+    overflow-x: auto;
+    height: 200px;
+    cursor: grab;
+    user-select: none;
+    scrollbar-width: none;
 }
 
-.footer-social a {
-    display: inline-block;
-    margin-right: 15px;
-    color: #cccccc;
-    text-decoration: none;
-    font-size: 14px;
+.carrossel-interno__filmes{
+    margin-left: 5em;
+    gap:80px;
+    display: flex;
 }
 
-.footer-social a:hover {
-    color: #ffffff;
+.carrossel--filmes{
+    position: relative;
+    min-width: 100px;
+    color:white; 
+    overflow: visible;    
+    list-style: none;   
 }
 
-.footer-bottom {
-    text-align: center;
-    border-top: 1px solid #33475b;
-    margin-top: 30px;
-    padding-top: 15px;
-    font-size: 12px;
-    color: #999999;
+.numeracao{
+    font-family: 'Poppins', sans-serif;
+    color: transparent;
+    -webkit-text-stroke: 1px white;
+    font-size: 11em;
+    line-height:0.8;
+    position: absolute;
+    left:-60px;
+    bottom: 0;
+    z-index: -1;
+
 }
+
+.carrossel--capa{
+    pointer-events: none;
+    width: 90px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+/* ESTILIZAÇÃO ESPECÍFICA PARA A PARTE DOS ATORES */
+
+.carrossel-interno__atores{
+    margin-left: 2em;
+    gap:30px;
+    display: flex;
+}
+
+.carrossel--atores{
+    position: relative;
+    color:white; 
+    overflow: visible;       
+}
+
+.carrossel--ator{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+

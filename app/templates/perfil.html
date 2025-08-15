@@ -1,0 +1,13 @@
+<h1>Meu Perfil</h1>
+{% if current_user.is_authenticated %} 
+    <p>Nome: {{ current_user.nome }}</p>
+    <p>Usuário: {{ current_user.usuario }}</p>
+    <img src="{{ current_user.foto_url }}" alt="foto de perfil">
+    <p>Descrição: <br> {{ current_user.descricao }} </p>
+{% else %}
+    <p>Você não está autenticado.</p>
+{% endif %}
+
+
+<a href="{{ url_for('main.edit_profile') }}">Editar perfil</a>
+<a href="{{ url_for('main.logout') }}">Logout</a>

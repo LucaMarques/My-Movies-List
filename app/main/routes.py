@@ -1,13 +1,15 @@
 from . import main
-from datetime import datetime
 from flask import render_template, request, redirect, url_for, session, flash, jsonify # type: ignore
-from app.models import db, Ator, Filme, Atuacao, Episodio, Genero, Usuario
+from app.models import db, Filme, Usuario, Ator
+from flask_login import login_required, current_user, login_user, logout_user
 
 
 # Pagina inicial
 @main.route('/')
 def index():
-    return render_template("index.html")
+    filmes = Filme.query.limit(4).all()
+    atores= Ator.query.limit(4).all()
+    return render_template("index.html",filmes=filmes,atores=atores)
 
 # Pagina de filmes/series
 @main.route('/series/<int:filme_id>')
@@ -45,37 +47,58 @@ def cadastro():
 # Formulário de login
 @main.route("/login", methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.perfil'))
     if request.method == "POST":
         usuario = request.form["usuario"]
         senha = request.form["senha"]
 
-        usuario_db = Usuario.query.filter_by(usuario=usuario).first()
+        user = Usuario.query.filter_by(usuario=usuario).first()
 
-        if usuario_db and usuario_db.verificar_senha(senha):
-            session["usuario_id"] = usuario_db.id
+        if user and user.verificar_senha(senha):
+            session["usuario_id"] = user.id
+            login_user(user)
             flash("Login realizado com sucesso!")
-            return redirect(url_for("main.index"))  # Altere conforme sua rota principal
+            return redirect(url_for("main.index")) 
         else:
             flash("Usuário ou senha inválidos.")
             return redirect(url_for("main.login"))
 
     return render_template("login.html")
 
-
+# Pagina de logout
 @main.route("/logout")
 def logout():
     session.pop("usuario_id", None)
+    logout_user()
     flash("Logout realizado com sucesso.")
     return redirect(url_for("main.login"))
 
+# Pagina perfil
 @main.route("/perfil")
+@login_required
 def perfil():
-    if "usuario_id" not in session:
+    if not current_user.is_authenticated:
         flash("Você precisa estar logado para ver essa página.")
         return redirect(url_for("main.login"))
 
     usuario = Usuario.query.get(session["usuario_id"])
     return render_template("perfil.html", usuario=usuario)
+
+@main.route('/editar-perfil', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    if request.method == 'POST':
+        current_user.nome = request.form.get('nome', current_user.nome)
+        current_user.usuario = request.form.get('usuario', current_user.usuario)
+        current_user.foto_url = request.form.get('foto_url', current_user.foto_url)
+        current_user.descricao = request.form.get('descricao', current_user.descricao)
+        db.session.add(current_user)
+        db.session.commit()
+        flash('Perfil atualizado!')
+        return redirect(url_for('main.perfil'))
+
+    return render_template('editar_perfil.html', usuario=current_user)
 
 @main.route("/sugestoes")
 def sugestoes():
