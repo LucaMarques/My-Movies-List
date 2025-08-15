@@ -45,15 +45,15 @@
             </div>
             <a href="#" class="subtitle">Ver tudo ></a>
         </div>
-        <div class="carrossel--visivel">
-            <li class="carrossel-interno__filmes">
+        <div class="carrossel--main">
+            <ul class="carrossel-interno__filmes">
                 {% for filme in filmes %}
-                    <ul class="carrossel--filmes">
+                    <li  class="carrossel--filmes">
                         <span class="numeracao">{{filme.id}}</span>
                         <img src="../static/img/min-Jurassic.jpg" alt="Imagem do filme {{filme.titulo}}" class="carrossel--capa">
-                    </ul>
+                    </li>
                 {% endfor %}
-            </li>
+            </ul>
         </div>
     </section>
 
@@ -65,7 +65,7 @@
             </div>
             <a href="#" class="subtitle">Ver tudo ></a>
         </div>
-        <div class="carrossel--visivel">
+        <div class="carrossel--main">
             <li class="carrossel-interno__atores">
                 {% for item in atores %}
                     <ul class="carrossel--atores">
@@ -84,15 +84,16 @@
             </div>
             <a href="#" class="subtitle">Ver tudo ></a>
         </div>
-        <div class="carrossel--visivel">
-            <li class="carrossel-interno__filmes">
+        <div class="carrossel--main">
+            <ul class="carrossel-interno__filmes">
                 {% for filme in filmes %}
-                    <ul class="carrossel--filmes">
+                    <li  class="carrossel--filmes">
                         <span class="numeracao">{{filme.id}}</span>
                         <img src="../static/img/min-Jurassic.jpg" alt="Imagem do filme {{filme.titulo}}" class="carrossel--capa">
-                    </ul>
+                    </li>
                 {% endfor %}
-            </li>
+            </ul>
         </div>
     </section>
+
 {% endblock %}

@@ -224,9 +224,12 @@ main{
     color:var(--enfase_1);
 }
 
-.carrossel--visivel{
-    overflow-x: hidden;
+.carrossel--main{
+    overflow-x: auto;
     height: 200px;
+    cursor: grab;
+    user-select: none;
+    scrollbar-width: none;
 }
 
 .carrossel-interno__filmes{
@@ -239,7 +242,8 @@ main{
     position: relative;
     min-width: 100px;
     color:white; 
-    overflow: visible;       
+    overflow: visible;    
+    list-style: none;   
 }
 
 .numeracao{
@@ -256,6 +260,7 @@ main{
 }
 
 .carrossel--capa{
+    pointer-events: none;
     width: 90px;
     height: 140px;
     object-fit: cover;
